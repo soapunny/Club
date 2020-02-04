@@ -64,6 +64,7 @@ public class StudentMenu {
 
     public int selectMenu(){
         //
+        broadcasting.broadcast("Choose one : ");
         int number = scanner.nextInt();
 
         if(number>=0 && number<=5){

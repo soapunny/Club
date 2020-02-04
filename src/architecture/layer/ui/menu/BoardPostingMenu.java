@@ -1,7 +1,6 @@
 package architecture.layer.ui.menu;
 
 import architecture.layer.ui.console.BoardPostingConsole;
-import architecture.layer.ui.console.ClubMemberConsole;
 import architecture.util.Broadcasting;
 import architecture.util.SpeakingAt;
 
@@ -31,15 +30,15 @@ public class BoardPostingMenu {
             switch (inputNumber){
                 case 1: boardPostingConsole.register();
                     break;
-                case 2: boardPostingConsole.findById();
+                case 2: boardPostingConsole.findByEmail();
                     break;
-                case 3: boardPostingConsole.findByEmail();
+                case 3: boardPostingConsole.findByTitle();
                     break;
                 case 4: boardPostingConsole.modify();
                     break;
                 case 5: boardPostingConsole.remove();
                     break;
-                case 0:
+                case 0: boardPostingConsole.setCurrentBoard(null);
                     return;
                 default:
                     broadcasting.broadcastln("Choose another one!!");
@@ -51,13 +50,17 @@ public class BoardPostingMenu {
         //
         broadcasting.broadcastln("");
         broadcasting.broadcastln("========================================");
-        broadcasting.broadcastln(" Student Menu");
+        if(boardPostingConsole.hasCurrentBoard()){
+            broadcasting.broadcastln(boardPostingConsole.getCurrentBoard()+" Board Posting Menu");
+        }else {
+            broadcasting.broadcastln(" Board Posting Menu");
+        }
         broadcasting.broadcastln("========================================");
-        broadcasting.broadcastln(" 1. Register        Club Member");
-        broadcasting.broadcastln(" 2. Find(club name) Club Member");
-        broadcasting.broadcastln(" 3. Find(email)     Club Member");
-        broadcasting.broadcastln(" 4. Modify          Club Member");
-        broadcasting.broadcastln(" 5. Remove          Club Member");
+        broadcasting.broadcastln(" 1. Register    Board Posting");
+        broadcasting.broadcastln(" 2. Find(email) Board Posting");
+        broadcasting.broadcastln(" 3. Find(title) Board Posting");
+        broadcasting.broadcastln(" 4. Modify      Board Posting");
+        broadcasting.broadcastln(" 5. Remove      Board Posting");
         broadcasting.broadcastln("========================================");
         broadcasting.broadcastln(" 0. Previous Menu");
         broadcasting.broadcastln("========================================");
@@ -65,6 +68,7 @@ public class BoardPostingMenu {
 
     public int selectMenu(){
         //
+        broadcasting.broadcast("Choose one : ");
         int number = scanner.nextInt();
 
         if(number>=0 && number<=5){

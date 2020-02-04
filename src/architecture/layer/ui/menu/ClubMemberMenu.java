@@ -38,7 +38,7 @@ public class ClubMemberMenu {
                     break;
                 case 5: clubMemberConsole.remove();
                     break;
-                case 0:
+                case 0: clubMemberConsole.setCurrentClub(null);
                     return;
                 default:
                     broadcasting.broadcastln("Choose another one!!");
@@ -50,7 +50,12 @@ public class ClubMemberMenu {
         //
         broadcasting.broadcastln("");
         broadcasting.broadcastln("========================================");
-        broadcasting.broadcastln(" Student Menu");
+        if(clubMemberConsole.hasCurrentClub()) {
+            broadcasting.broadcastln(clubMemberConsole.getCurrentClub()+" Club Member Menu");
+        }else{
+            broadcasting.broadcastln(" Club Member Menu");
+
+        }
         broadcasting.broadcastln("========================================");
         broadcasting.broadcastln(" 1. Register        Club Member");
         broadcasting.broadcastln(" 2. Find(club name) Club Member");
@@ -64,6 +69,7 @@ public class ClubMemberMenu {
 
     public int selectMenu(){
         //
+        broadcasting.broadcast("Choose one : ");
         int number = scanner.nextInt();
 
         if(number>=0 && number<=5){

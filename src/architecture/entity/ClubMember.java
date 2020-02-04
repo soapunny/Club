@@ -1,42 +1,25 @@
-package architecture.dto;
+package architecture.entity;
 
-import architecture.entity.ClubMember;
 import architecture.util.DateUtil;
 
-public class ClubMemberDTO {
+public class ClubMember {
     //key가 존재하지 않음
     private String clubName;
     private String email;
     private String name;
     private String joinDate;
 
-    private ClubMemberDTO(){
+    private ClubMember(){
         //
         joinDate = new DateUtil().getCurrentDate();
     }
 
-    public ClubMemberDTO(String clubName, String memberEmail, String memberName){
+    public ClubMember(String clubName, String memberEmail, String memberName){
         //
         this();
         this.clubName = clubName;
         this.email = memberEmail;
         this.name = memberName;
-    }
-
-    public ClubMemberDTO(ClubMember clubMember){
-        //
-        this.clubName = clubMember.getClubName();
-        this.email = clubMember.getEmail();
-        this.name = clubMember.getName();
-        this.joinDate = clubMember.getJoinDate();
-    }
-
-    public ClubMember toClubMember() {
-        //
-        ClubMember clubMember = new ClubMember(clubName, email, name);
-        clubMember.setJoinDate(joinDate);
-
-        return clubMember;
     }
 
     public String getClubName() {

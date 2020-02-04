@@ -25,6 +25,7 @@ public class ClubMenu {
     public void show(){
         //
         int inputNumber = -1;
+
         while(true) {
             displayMenu();
             inputNumber = selectMenu();
@@ -34,18 +35,15 @@ public class ClubMenu {
                     clubConsole.register();
                     break;
                 case 2:
-                    clubConsole.findById();
-                    break;
-                case 3:
                     clubConsole.findByClubName();
                     break;
-                case 4:
+                case 3:
                     clubConsole.modify();
                     break;
-                case 5:
+                case 4:
                     clubConsole.remove();
                     break;
-                case 6:
+                case 5:
                     clubMemberMenu.show();
                     break;
                 case 0:
@@ -63,12 +61,11 @@ public class ClubMenu {
         broadcasting.broadcastln(" Club Menu");
         broadcasting.broadcastln("========================================");
         broadcasting.broadcastln(" 1. Register   Club");
-        broadcasting.broadcastln(" 2. Find(ID)   Club");
-        broadcasting.broadcastln(" 3. Find(name) Club");
-        broadcasting.broadcastln(" 4. Modify     Club");
-        broadcasting.broadcastln(" 5. Remove     Club");
+        broadcasting.broadcastln(" 2. Find(name) Club");
+        broadcasting.broadcastln(" 3. Modify     Club");
+        broadcasting.broadcastln(" 4. Remove     Club");
         broadcasting.broadcastln("========================================");
-        broadcasting.broadcastln(" 6. To Club Member Menu");
+        broadcasting.broadcastln(" 5. To Club Member Menu");
         broadcasting.broadcastln("========================================");
         broadcasting.broadcastln(" 0. Previous Menu");
         broadcasting.broadcastln("========================================");
@@ -76,9 +73,10 @@ public class ClubMenu {
 
     public int selectMenu(){
         //
+        broadcasting.broadcast("Choose one : ");
         int number = scanner.nextInt();
 
-        if(number>=0 && number<=6){
+        if(number>=0 && number<=5){
             scanner.nextLine();
             return number;
         }

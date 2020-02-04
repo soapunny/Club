@@ -1,14 +1,69 @@
 package architecture.dto;
 
+import architecture.entity.Club;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class ClubDTO {
     //
-    private String id;//key : clubId
-    private String name;
+    private String id;// key
+    private String name;// alternative key
     private String intro;
     private String foundationDate;
 
-    public ClubDTO(){
+    private List<ClubMemberDTO> clubMemberDTOList;
+
+    private ClubDTO(){
         //
+        clubMemberDTOList = new ArrayList<>();
+    }
+
+    public ClubDTO(String name, String intro){
+        //
+        this();
+        this.name = name;
+        this.intro = intro;
+    }
+
+    public ClubDTO(Club club){
+        //
+        this();
+        this.id = club.getAutoId();
+        this.name = club.getName();
+        this.intro = club.getIntro();
+        this.foundationDate = club.getFoundationDate();
+
+        if(club.getClubMemberList().size()>0) {
+            clubMemberDTOList = club.getClubMemberList()
+                                    .stream()
+                                    .map(clubMember -> new ClubMemberDTO(clubMember))
+                                    .collect(Collectors.toList());
+        }
+    }
+
+    public Club toClub(){
+        //
+        Club club = new Club(name, intro);
+        club.setAutoId(id);
+        club.setFoundationDate(foundationDate);
+        if(clubMemberDTOList.size()>0){
+            for(ClubMemberDTO clubMemberDTO : clubMemberDTOList)
+                club.getClubMemberList().add(clubMemberDTO.toClubMember());
+        }
+
+        return club;
+    }
+
+    @Override
+    public String toString(){
+        //
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Club Name : "+name)
+                     .append(", Intro : "+intro)
+                     .append(", Foundation date : "+foundationDate);
+        return stringBuilder.toString();
     }
 
     public String getId() {
@@ -34,5 +89,11 @@ public class ClubDTO {
     }
     public void setFoundationDate(String foundationDate) {
         this.foundationDate = foundationDate;
+    }
+    public List<ClubMemberDTO> getClubMemberDTOList() {
+        return clubMemberDTOList;
+    }
+    public void setClubMemberDTOList(List<ClubMemberDTO> clubMemberDTOList) {
+        this.clubMemberDTOList = clubMemberDTOList;
     }
 }

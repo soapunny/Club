@@ -1,5 +1,14 @@
 package architecture.dto;
 
+import architecture.entity.Address;
+import architecture.entity.ClubMember;
+import architecture.entity.Student;
+import architecture.util.DateUtil;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class StudentDTO {
     //
     private String id; //key : email
@@ -7,12 +16,87 @@ public class StudentDTO {
     private String nickname;
     private String birthday;
     private String phoneNumber;
+    private List<AddressDTO> addresses;
+    private List<ClubMemberDTO> clubMembers;
 
-    public StudentDTO(){
+    private StudentDTO(){
         //
-
+        addresses = new ArrayList<>();
+        clubMembers = new ArrayList<>();
     }
 
+    public StudentDTO(String name, String birthday, String phoneNumber){
+        //
+        this();
+        this.name = name;
+        this.birthday = new DateUtil().getDateOf(birthday);
+        this.phoneNumber = phoneNumber;
+    }
+
+    public StudentDTO(Student student){
+        //
+        this();
+        this.id = student.getId();
+        this.name = student.getName();
+        this.nickname = student.getNickname();
+        this.birthday = student.getBirthday();
+        this.phoneNumber = student.getPhoneNumber();
+        if(student.getAddresses().size()>0){
+            this.addresses = student.getAddresses()
+                                    .stream()
+                                    .map(address -> new AddressDTO(address))
+                                    .collect(Collectors.toList());
+        }
+        if(student.getClubMembers().size()>0){
+            this.clubMembers = student.getClubMembers()
+                                      .stream()
+                                      .map(clubMember -> new ClubMemberDTO(clubMember))
+                                      .collect(Collectors.toList());
+        }
+    }
+
+    public Student toStudent(){
+        //
+        Student student = new Student(name, birthday, phoneNumber);
+        student.setId(id);
+        student.setNickname(nickname);
+        if(addresses.size()>0){
+            List<Address> addressList = addresses.stream()
+                                                 .map(addressDTO -> addressDTO.toAddress())
+                                                 .collect(Collectors.toList());
+            student.setAddresses(addressList);
+        }
+        if(clubMembers.size()>0){
+            List<ClubMember> clubMemberList = clubMembers.stream()
+                                                         .map(clubMemberDTO -> clubMemberDTO.toClubMember())
+                                                         .collect(Collectors.toList());
+            student.setClubMembers(clubMemberList);
+        }
+
+        return student;
+    }
+
+    @Override
+    public String toString(){
+        //
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("ID : "+id)
+                     .append(", Name : "+name)
+                     .append(", Nickname : "+nickname)
+                     .append(", Birthday : "+birthday)
+                     .append(", Phone number : "+phoneNumber);
+        int cnt = 0;
+        if(addresses.size()>0){
+            for(AddressDTO addressDTO : addresses)
+                stringBuilder.append("\n\t["+ ++cnt + "] "+addressDTO);
+        }
+        cnt = 0;
+        if(clubMembers.size()>0){
+            for(ClubMemberDTO clubMemberDTO : clubMembers)
+                stringBuilder.append("\n\t["+ ++cnt + "] "+clubMemberDTO);
+        }
+        return stringBuilder.toString();
+    }
 
     public String getId() {
         return id;

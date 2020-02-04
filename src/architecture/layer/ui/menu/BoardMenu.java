@@ -35,18 +35,15 @@ public class BoardMenu {
                     boardConsole.register();
                     break;
                 case 2:
-                    boardConsole.findById();
-                    break;
-                case 3:
                     boardConsole.findByName();
                     break;
-                case 4:
+                case 3:
                     boardConsole.modify();
                     break;
-                case 5:
+                case 4:
                     boardConsole.remove();
                     break;
-                case 6:
+                case 5:
                     boardPostingMenu.show();
                     break;
                 case 0:
@@ -64,12 +61,11 @@ public class BoardMenu {
         broadcasting.broadcastln(" Board Menu");
         broadcasting.broadcastln("========================================");
         broadcasting.broadcastln(" 1. Register    Board");
-        broadcasting.broadcastln(" 2. Find(email) Board");
-        broadcasting.broadcastln(" 3. Find(name)  Board");
-        broadcasting.broadcastln(" 4. Modify      Board");
-        broadcasting.broadcastln(" 5. Remove      Board");
+        broadcasting.broadcastln(" 2. Find(name)  Board");
+        broadcasting.broadcastln(" 3. Modify      Board");
+        broadcasting.broadcastln(" 4. Remove      Board");
         broadcasting.broadcastln("========================================");
-        broadcasting.broadcastln(" 6. To Board Posting Menu");
+        broadcasting.broadcastln(" 5. To Board Posting Menu");
         broadcasting.broadcastln("========================================");
         broadcasting.broadcastln(" 0. Previous Menu");
         broadcasting.broadcastln("========================================");
@@ -77,9 +73,10 @@ public class BoardMenu {
 
     public int selectMenu(){
         //
+        broadcasting.broadcast("Choose one : ");
         int number = scanner.nextInt();
 
-        if(number>=0 && number<=6){
+        if(number>=0 && number<=5){
             scanner.nextLine();
             return number;
         }

@@ -1,15 +1,50 @@
 package architecture.dto;
 
-public class BoardDTO {
+import architecture.entity.Board;
+import architecture.util.DateUtil;
+
+public class BoardDTO{
     //
     private String id; //key : boardId(clubId)
+    private String name; //alternative key
     private String adminEmail;
-    private String name;
     private String foundationDay;
 
-    public BoardDTO(){
+    private BoardDTO(){
         //
+        foundationDay = new DateUtil().getCurrentDate();
+    }
 
+    public BoardDTO(String name, String adminEmail){
+        //
+        this();
+        this.name = name;
+        this.adminEmail = adminEmail;
+    }
+
+    public BoardDTO(Board board){
+        //
+        this.id = board.getId();
+        this.adminEmail = board.getAdminEmail();
+        this.name = board.getName();
+        this.foundationDay = board.getFoundationDay();
+    }
+
+    public Board toBoard(){
+        //
+        Board board = new Board(name, adminEmail);
+        board.setId(id);
+        board.setFoundationDay(foundationDay);
+        return board;
+    }
+
+    @Override
+    public String toString(){
+        //
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Board name : "+name).append(", Admin email : "+adminEmail).append(", Foundation day : "+foundationDay);
+
+        return stringBuilder.toString();
     }
 
     public String getId() {
