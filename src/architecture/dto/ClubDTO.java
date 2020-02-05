@@ -63,6 +63,13 @@ public class ClubDTO {
         stringBuilder.append("Club Name : "+name)
                      .append(", Intro : "+intro)
                      .append(", Foundation date : "+foundationDate);
+
+        if(!clubMemberDTOList.isEmpty()){
+            int cnt = 0;
+            for(ClubMemberDTO clubMemberDTO : clubMemberDTOList){
+                stringBuilder.append("\n\t["+(++cnt)+"] "+clubMemberDTO);
+            }
+        }
         return stringBuilder.toString();
     }
 

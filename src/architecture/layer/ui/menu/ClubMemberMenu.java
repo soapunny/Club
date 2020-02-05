@@ -30,13 +30,11 @@ public class ClubMemberMenu {
             switch (inputNumber){
                 case 1: clubMemberConsole.register();
                     break;
-                case 2: clubMemberConsole.findByClubName();
+                case 2: clubMemberConsole.findAll();
                     break;
-                case 3: clubMemberConsole.findByEmail();
+                case 3: clubMemberConsole.modify();
                     break;
-                case 4: clubMemberConsole.modify();
-                    break;
-                case 5: clubMemberConsole.remove();
+                case 4: clubMemberConsole.remove();
                     break;
                 case 0: clubMemberConsole.setCurrentClub(null);
                     return;
@@ -57,11 +55,10 @@ public class ClubMemberMenu {
 
         }
         broadcasting.broadcastln("========================================");
-        broadcasting.broadcastln(" 1. Register        Club Member");
-        broadcasting.broadcastln(" 2. Find(club name) Club Member");
-        broadcasting.broadcastln(" 3. Find(email)     Club Member");
-        broadcasting.broadcastln(" 4. Modify          Club Member");
-        broadcasting.broadcastln(" 5. Remove          Club Member");
+        broadcasting.broadcastln(" 1. Register Club Member");
+        broadcasting.broadcastln(" 2. Find All Club Member");
+        broadcasting.broadcastln(" 3. Modify   Club Member");
+        broadcasting.broadcastln(" 4. Remove   Club Member");
         broadcasting.broadcastln("========================================");
         broadcasting.broadcastln(" 0. Previous Menu");
         broadcasting.broadcastln("========================================");
@@ -72,7 +69,7 @@ public class ClubMemberMenu {
         broadcasting.broadcast("Choose one : ");
         int number = scanner.nextInt();
 
-        if(number>=0 && number<=5){
+        if(number>=0 && number<=4){
             scanner.nextLine();
             return number;
         }

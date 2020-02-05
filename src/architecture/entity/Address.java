@@ -10,11 +10,12 @@ public class Address {
     private Address(){
         //
         nation = "South Korea";
-        addressType = AddressType.Home;
+        addressType = AddressType.HOME;
     }
 
     public Address(String streetAddress){
         //
+        this();
         this.streetAddress = streetAddress;
     }
 

@@ -37,7 +37,7 @@ public class BoardPostingConsole {
 
     public void findBoard(){
         //
-        String name = inputUtil.getValueOf("Board name to find(0. Board Posting Menu)");
+        String name = inputUtil.getValueOf("Board name to find(0. Board Posting Menu)").trim();
         if(name.equals("0"))
             return;
 
@@ -56,13 +56,13 @@ public class BoardPostingConsole {
             return;
         }
 
-        String writerEmail = inputUtil.getValueOf("Writer's email(0. Board Posting Menu)");
+        String writerEmail = inputUtil.getValueOf("Writer's email(0. Board Posting Menu)").trim();
         if(writerEmail.isEmpty() || writerEmail.equals("0"))
             return;
-        String title = inputUtil.getValueOf("Title(0. Board Posting Menu)");
+        String title = inputUtil.getValueOf("Title(0. Board Posting Menu)").trim();
         if(title.isEmpty() || title.equals("0"))
             return;
-        String contents = inputUtil.getValueOf("Contents(0. Board Posting Menu)");
+        String contents = inputUtil.getValueOf("Contents(0. Board Posting Menu)").trim();
         if(contents.isEmpty() || contents.equals("0"))
             return;
 
@@ -82,7 +82,7 @@ public class BoardPostingConsole {
             return;
         }
 
-        String title = inputUtil.getValueOf("Title(0. Board Posting Menu)");
+        String title = inputUtil.getValueOf("Title(0. Board Posting Menu)").trim();
         if(title.isEmpty() || title.equals("0"))
             return;
 
@@ -106,7 +106,7 @@ public class BoardPostingConsole {
             return;
         }
 
-        String email = inputUtil.getValueOf("Writer's Email(0. Board Posting Menu)");
+        String email = inputUtil.getValueOf("Writer's Email(0. Board Posting Menu)").trim();
         if(email.isEmpty() || email.equals("0"))
             return;
 
@@ -123,9 +123,9 @@ public class BoardPostingConsole {
         }
     }
 
-    public void showFindMenu(){
+    public int showFindMenu(){
         //
-        Outer:while(true) {
+        while(true) {
             broadcasting.broadcastln("");
             broadcasting.broadcastln("\t1. Find by title");
             broadcasting.broadcastln("\t2. Find by email");
@@ -133,11 +133,11 @@ public class BoardPostingConsole {
             char number = inputUtil.getValueOf("\tChoose one").trim().charAt(0);
             switch (number){
                 case '1': findByTitle();
-                    break Outer;
+                    return 1;
                 case '2': findByEmail();
-                    break Outer;
+                    return 2;
                 case '0':
-                    return;
+                    return 0;
             }
         }
     }
@@ -149,7 +149,7 @@ public class BoardPostingConsole {
             return;
         }
 
-        showFindMenu();
+        if(showFindMenu() == 0) return;
 
         String sequence = inputUtil.getValueOf("Choose the posting's sequence(0. Board Posting Menu)").trim();
         if(sequence.isEmpty() || sequence.equals(0))
@@ -178,7 +178,7 @@ public class BoardPostingConsole {
             return;
         }
 
-        showFindMenu();
+        if(showFindMenu() == 0) return;
 
         String sequence = inputUtil.getValueOf("Choose the posting's sequence(0. Board Posting Menu)").trim();
         if(sequence.isEmpty() || sequence.equals(0))

@@ -22,9 +22,10 @@ public class Student implements Id {
         clubMembers = new ArrayList<>();
     }
 
-    public Student(String name, String birthday, String phoneNumber){
+    public Student(String id, String name, String birthday, String phoneNumber){
         //
         this();
+        this.id = id;
         this.name = name;
         this.birthday = birthday;
         this.phoneNumber = phoneNumber;

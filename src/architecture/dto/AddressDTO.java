@@ -13,13 +13,13 @@ public class AddressDTO {
     private AddressDTO(){
         //
         nation = "South Korea";
-        addressType = AddressType.Home;
+        addressType = AddressType.HOME;
     }
 
-    public AddressDTO(String streetAddress, String zipCode){
+    public AddressDTO(String streetAddress){
         //
+        this();
         this.streetAddress = streetAddress;
-        setZipCode(zipCode);
     }
 
     public AddressDTO(Address address){

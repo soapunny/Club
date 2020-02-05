@@ -25,9 +25,10 @@ public class StudentDTO {
         clubMembers = new ArrayList<>();
     }
 
-    public StudentDTO(String name, String birthday, String phoneNumber){
+    public StudentDTO(String id, String name, String birthday, String phoneNumber){
         //
         this();
+        this.id = id;
         this.name = name;
         this.birthday = new DateUtil().getDateOf(birthday);
         this.phoneNumber = phoneNumber;
@@ -57,8 +58,7 @@ public class StudentDTO {
 
     public Student toStudent(){
         //
-        Student student = new Student(name, birthday, phoneNumber);
-        student.setId(id);
+        Student student = new Student(id, name, birthday, phoneNumber);
         student.setNickname(nickname);
         if(addresses.size()>0){
             List<Address> addressList = addresses.stream()
@@ -127,5 +127,17 @@ public class StudentDTO {
     }
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+    public List<AddressDTO> getAddresses() {
+        return addresses;
+    }
+    public void setAddresses(List<AddressDTO> addresses) {
+        this.addresses = addresses;
+    }
+    public List<ClubMemberDTO> getClubMembers() {
+        return clubMembers;
+    }
+    public void setClubMembers(List<ClubMemberDTO> clubMembers) {
+        this.clubMembers = clubMembers;
     }
 }

@@ -7,19 +7,20 @@ public class ClubMember {
     private String clubName;
     private String email;
     private String name;
+    private Position position;
     private String joinDate;
 
     private ClubMember(){
         //
         joinDate = new DateUtil().getCurrentDate();
+        position = Position.MEMBER;
     }
 
-    public ClubMember(String clubName, String memberEmail, String memberName){
+    public ClubMember(String clubName, String memberEmail){
         //
         this();
         this.clubName = clubName;
         this.email = memberEmail;
-        this.name = memberName;
     }
 
     public String getClubName() {
@@ -39,6 +40,12 @@ public class ClubMember {
     }
     public void setName(String name) {
         this.name = name;
+    }
+    public Position getPosition() {
+        return position;
+    }
+    public void setPosition(Position position) {
+        this.position = position;
     }
     public String getJoinDate() {
         return joinDate;
