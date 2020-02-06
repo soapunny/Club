@@ -164,6 +164,7 @@ public class BoardPostingConsole {
         try {
             BoardPostingDTO boardPostingDTO = new BoardPostingDTO(title, contents);
             boardPostingDTO.setId(sequence);
+            boardPostingDTO.setBoardId(currentBoard.getId());
             boardPostingBusiness.modify(boardPostingDTO);
             broadcasting.broadcastln("Modify Success");
         }catch (Exception e){

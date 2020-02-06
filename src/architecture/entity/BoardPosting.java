@@ -10,6 +10,7 @@ public class BoardPosting implements AutoId {
     private String title;
     private String contents;
     private String writtenDate;
+    private String boardId;
 
     private BoardPosting(){
         //
@@ -47,6 +48,12 @@ public class BoardPosting implements AutoId {
     }
     public void setWrittenDate(String writtenDate) {
         this.writtenDate = writtenDate;
+    }
+    public String getBoardId() {
+        return boardId;
+    }
+    public void setBoardId(String boardId) {
+        this.boardId = boardId;
     }
     @Override
     public String getAutoId() {

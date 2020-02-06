@@ -1,6 +1,7 @@
 package architecture.entity;
 
 import architecture.entity.blueprint.AutoId;
+import architecture.util.DateUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +18,7 @@ public class Club implements AutoId {
     private Club(){
         //
         clubMemberList = new ArrayList<>();
+        foundationDate = new DateUtil().getCurrentDate();
     }
 
     public Club(String name, String intro){

@@ -1,6 +1,7 @@
 package architecture.dto;
 
 import architecture.entity.Club;
+import architecture.util.DateUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +26,7 @@ public class ClubDTO {
         this();
         this.name = name;
         this.intro = intro;
+        this.foundationDate = new DateUtil().getCurrentDate();
     }
 
     public ClubDTO(Club club){
@@ -35,7 +37,7 @@ public class ClubDTO {
         this.intro = club.getIntro();
         this.foundationDate = club.getFoundationDate();
 
-        if(club.getClubMemberList().size()>0) {
+        if(!club.getClubMemberList().isEmpty()) {
             clubMemberDTOList = club.getClubMemberList()
                                     .stream()
                                     .map(clubMember -> new ClubMemberDTO(clubMember))
@@ -48,7 +50,7 @@ public class ClubDTO {
         Club club = new Club(name, intro);
         club.setAutoId(id);
         club.setFoundationDate(foundationDate);
-        if(clubMemberDTOList.size()>0){
+        if(!clubMemberDTOList.isEmpty()){
             for(ClubMemberDTO clubMemberDTO : clubMemberDTOList)
                 club.getClubMemberList().add(clubMemberDTO.toClubMember());
         }

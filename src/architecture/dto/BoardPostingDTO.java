@@ -10,6 +10,7 @@ public class BoardPostingDTO {
     private String title;
     private String contents;
     private String writtenDate;
+    private String boardId;
 
     private BoardPostingDTO(){
         //
@@ -93,5 +94,11 @@ public class BoardPostingDTO {
     }
     public void setWrittenDate(String writtenDate) {
         this.writtenDate = writtenDate;
+    }
+    public String getBoardId() {
+        return boardId;
+    }
+    public void setBoardId(String boardId) {
+        this.boardId = boardId;
     }
 }

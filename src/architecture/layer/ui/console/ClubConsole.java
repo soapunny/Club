@@ -62,8 +62,8 @@ public class ClubConsole {
         if(clubName.isEmpty() || clubName.equals("0"))
             return;
 
-        String newIntro = inputUtil.getValueOf("Club intro to modify(0. Club intro, Enter. No change").trim();
-        if(newIntro.equals("0"))
+        String newIntro = inputUtil.getValueOf("Club intro to modify(0. Club menu").trim();
+        if(newIntro.isEmpty() || newIntro.equals("0"))
             return;
 
         try {

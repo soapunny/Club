@@ -26,15 +26,18 @@ public class BoardConsole {
 
     public void register() {
         //
-        String name = inputUtil.getValueOf("Board name to register(0. Board menu)").trim();//board 이름은 중복확인
-        if(name.isEmpty() || name.equals("0"))
+        String clubName = inputUtil.getValueOf("Select your club(0. Board menu)").trim();//club 이름 확인
+        if(clubName.isEmpty() || clubName.equals("0"))
             return;
-        String email = inputUtil.getValueOf("Admin email to register(0. Board menu)").trim();//Admin email은 ClubMember에 포함되어 있는지 확인
-        if(email.isEmpty() || email.equals("0"))
+        String boardName = inputUtil.getValueOf("Board name to register(0. Board menu)").trim();//board 이름은 중복확인
+        if(boardName.isEmpty() || boardName.equals("0"))
+            return;
+        String adminEmail = inputUtil.getValueOf("Admin email to register(0. Board menu)").trim();//Admin email은 ClubMember에 포함되어 있는지 확인
+        if(adminEmail.isEmpty() || adminEmail.equals("0"))
             return;
 
         try{
-            BoardDTO registeredBoard = boardBusiness.register(name, email);
+            BoardDTO registeredBoard = boardBusiness.register(clubName, boardName, adminEmail);
             broadcasting.broadcastln("Register success -> "+registeredBoard);
         }catch (Exception e){
             broadcasting.broadcastln(e.getMessage());
@@ -43,7 +46,7 @@ public class BoardConsole {
 
     public void findByName() {
         //
-        String name = inputUtil.getValueOf("Board name to find(0. Board menu)").trim();
+        String name = inputUtil.getValueOf("Board name to find a board(0. Board menu)").trim();
         if(name.equals("0"))
             return;
 

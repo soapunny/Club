@@ -6,4 +6,5 @@ public interface DataDistributor {
     BoardPostingData getBoardPostingData();
     ClubData getClubData();
     StudentData getStudentData();
+    IdData getIdData();
 }
