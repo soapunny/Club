@@ -11,7 +11,6 @@ import architecture.layer.storage.blueprint.ClubData;
 import architecture.layer.storage.blueprint.IdData;
 import architecture.layer.storage.blueprint.StudentData;
 
-import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -57,7 +56,7 @@ public class ClubBusinessLogic implements ClubBusiness {
                                     .map(club -> new ClubDTO(club))
                                     .orElseThrow(()->new ClubNotFoundException("No such club using this club name -> "+clubDTO.getName()));
         clubDTO.setId(foundClub.getId());
-        clubData.update(clubDTO);
+        clubData.update(clubDTO.toClub());
     }
 
     @Override
@@ -88,18 +87,33 @@ public class ClubBusinessLogic implements ClubBusiness {
                                           .orElseThrow(() -> new StudentNotFoundException("There is no student using this email -> "+clubMemberDTO.getEmail()));
         clubMemberDTO.setName(foundStudent.getName());
         foundClub.getClubMemberDTOList().add(clubMemberDTO);
-        clubData.update(foundClub); // TODO check exception
+        clubData.update(foundClub.toClub()); // TODO check exception
+
+        // TODO register the member's information to the studentMap either
         return clubMemberDTO;
     }
 
     @Override
     public List<ClubMemberDTO> findAllMembers(String name) {
-        return null;
+        //해당 클럽의 모든 맴버 출력
+        return Optional.ofNullable(clubData.retrieveByName(name))
+                        .map(club -> new ClubDTO(club).getClubMemberDTOList())
+                        .orElseThrow(() -> new ClubNotFoundException("No such club using this name -> "+name));
     }
 
     @Override
     public void modifyMember(ClubMemberDTO clubMemberDTO) {
+        ClubDTO foundClub = Optional.ofNullable(clubData.retrieveByName(clubMemberDTO.getName()))
+                .map(club -> new ClubDTO(club))
+                .orElseThrow(()-> new ClubNotFoundException("No such club using this name -> "+clubMemberDTO.getClubName()));
+        List<ClubMemberDTO> clubMemberDTOList = foundClub.getClubMemberDTOList()
+                .stream()
+                .filter(clubMember -> clubMember.getEmail().equals(clubMemberDTO.getEmail()))
+                .collect(Collectors.toList());
+        if(clubMemberDTOList.isEmpty())
+            throw new ClubMemberNotFoundException("No such club member using this email -> "+clubMemberDTO.getEmail());
 
+        //TODO modify the student information in the studentMap either
     }
 
     @Override

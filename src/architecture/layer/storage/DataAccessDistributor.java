@@ -5,6 +5,7 @@ import architecture.layer.storage.blueprint.*;
 public class DataAccessDistributor implements DataDistributor {
     //
     private static DataDistributor instance;
+
     private IdData idData;
     private BoardData boardData;
     private BoardPostingData boardPostingData;
@@ -33,18 +34,22 @@ public class DataAccessDistributor implements DataDistributor {
     public BoardData getBoardData() {
         return boardData;
     }
+
     @Override
     public BoardPostingData getBoardPostingData() {
         return boardPostingData;
     }
+
     @Override
     public ClubData getClubData() {
         return clubData;
     }
+
     @Override
     public StudentData getStudentData() {
         return studentData;
     }
+
     @Override
     public IdData getIdData() {
         return idData;

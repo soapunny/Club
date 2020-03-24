@@ -91,7 +91,7 @@ public class BoardPostingBusinessLogic implements BoardPostingBusiness {
         boardPostingDTO.setWriterEmail(foundBoardPosting.getWriterEmail());
         boardPostingDTO.setWrittenDate(foundBoardPosting.getWrittenDate());
 
-        boardPostingData.update(boardPostingDTO);
+        boardPostingData.update(boardPostingDTO.toBoardPosting());
     }
 
     @Override
